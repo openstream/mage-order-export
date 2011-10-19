@@ -1,0 +1,7 @@
+"Order Export", "Einstellungen für den Export der Bestellungen"
+"Path for the csv file to be stored", "Absoluter Dateipfad für die CSV Datei auf dem Server"
+"Export Mail Receiver Name", "Empfängername für Exportmail"
+"Export Mail Receiver Mail", "Empfängermail für Exportmail"
+"Status of Orders", "Status der zu exportierenden Bestellungen"
+"see Attachment", "siehe Anhang"
+"Exported order(s) from ", "Exportierte Bestellungen seit "

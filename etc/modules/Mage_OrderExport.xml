@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mage_OrderExport>
+        	<version>0.1.0</version>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Mage_OrderExport>
+    </modules>
+</config>
