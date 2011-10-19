@@ -1,0 +1,15 @@
+########### Openstream Solutions ################
+#################################################
+
+This Magento module brigs you the opportunity to export 
+all orders with a specific status via a cronjob in a CSV file and send them via mail.
+
+Installation:
+- Copy all files and folders into your Magento Installation
+
+Konfiguration:
+- Activate your crontab or schedule manager
+- Execute the cron.php of Magento (e.g. */1 * * * * /path/to/php -f /path/to/magento/cron.php)
+- Edit the config.xml of the module (app/code/community/Mage/OrderExport/etc) and edit the time you want to export
+the orders in the <schedule><cron_expr>15 14 * * *</cron_expr></schedule> line (def. 2.15pm)
+- You can change the email and name of the recipient in the Admin Panel under System/Configuration/Sales/Order Export
