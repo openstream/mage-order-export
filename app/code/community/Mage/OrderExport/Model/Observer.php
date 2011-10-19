@@ -14,7 +14,7 @@ class Mage_OrderExport_Model_Observer
 		Mage::log("Check for new Orders", null, 'orderexport.log');
 		// Load where to store the file
 		$path = Mage::getStoreConfig('sales/export/path');
-		if(empty($mail_of_receiver)) {
+		if(empty($path)) {
 			$path = 'var/report';
 		}
 		
