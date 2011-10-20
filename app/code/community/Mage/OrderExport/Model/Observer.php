@@ -11,7 +11,7 @@ class Mage_OrderExport_Model_Observer
 	 */
 	public function check($observer) 
 	{
-		Mage::log("Check for new Orders", null, 'orderexport.log');
+		Mage::log("Checking for new Orders", null, 'orderexport.log');
 		// Load where to store the file
 		$path = Mage::getStoreConfig('sales/export/path');
 		if(empty($path)) {
@@ -81,34 +81,35 @@ class Mage_OrderExport_Model_Observer
 			       	$fp = fopen($filename, 'w');
 					fwrite($fp, $content);
 					fclose($fp);
-					Mage::log("$i order(s) in $filename successfully exported", null, 'orderexport.log');
-					
+					Mage::log("$i order(s) in $filename successfully exported!!", null, 'orderexport.log');
+
 					// ### now we want to send the new file as email ###
 					$mail = new Zend_Mail();
-            		$mail->setBodyText(Mage::helper('orderexport')->__('see Attachment'));
+            		$mail->setBodyText('siehe Anhang');
 					// Get the data from the store config (owner)
         			$mail->setFrom(Mage::getStoreConfig('trans_email/ident_general/email'), Mage::getStoreConfig('trans_email/ident_general/name'));
 					// Get the data from the orderexport config
 					$mail->addTo($mail_of_receiver, $name_of_receiver);
-					$mail->setSubject(Mage::helper('orderexport')->__("Exported order(s) from "). $yesterday - $today);
+					$mail->setSubject("Exportierte Bestellungen vom $yesterday - $today");
 
 					// Add the file as attachment
 					$att = $mail->createAttachment(file_get_contents($filename));
 					$att->type        = 'text/csv';
+					$att->disposition = Zend_Mime::DISPOSITION_INLINE;
 					$att->encoding    = Zend_Mime::ENCODING_BASE64;
 					$att->filename    = $filename;
             		
 					// Send
         			$mail->send();
-					
+					Mage::log("Sending Mail to $mail_of_receiver", null, 'orderexport.log');
 				} else {
 				    Mage::log('No write permission in folder', null, 'orderexport.log');
 				}
             } catch (Exception $e) {
-                Mage::log($e->getMessage(), null, 'orderexport.log');
+                Mage::log('Exception: '.$e->getMessage(), null, 'orderexport.log');
             }
 		} else {
-			Mage::log('There are no new orders with your status', null, 'orderexport.log');
+			Mage::log('There are no new orders with your status '.$filter_status, null, 'orderexport.log');
 		}
 	}
 }
